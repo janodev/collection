@@ -21,10 +21,19 @@ public final class CollectionViewLayout: UICollectionViewFlowLayout
     {
         self.init()
         self.style = style
-        self.minimumLineSpacing = 0 // minimum spacing to use between lines of items in the grid
-        self.minimumInteritemSpacing = 0 // minimum spacing to use between items in the same row
-        self.headerReferenceSize = CGSize(width: 0, height: 60) // default sizes to use for section headers
-        self.configLayout() // This is for cases where datasource is already set and we are switching layout
+        
+        // minimum spacing to use between lines of items in the grid
+        self.minimumLineSpacing = 10
+        
+        // Minimum spacing to use between items in the same row.
+        // Careful, a value of 0 will make the cells disappear in horizontal scrolling.
+        self.minimumInteritemSpacing = 10
+        
+        // default sizes to use for section headers
+        self.headerReferenceSize = CGSize(width: 0, height: 60)
+        
+        // This is for cases where datasource is already set and we are switching layout
+        self.configLayout()
     }
     
     override public func invalidateLayout() {

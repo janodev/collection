@@ -10,9 +10,12 @@ import UIKit
         scrollDirection = .vertical
         estimatedItemSize = CGSize(width: collectionView.frame.width, height: 60)
       ```
+      Note that if you set estimatedItemSize = UICollectionViewFlowLayout.automaticSize,
+      the layout is completely screwed.
  
    2. The view passed as generic should use Auto Layout.
       An example view could have, for instance, a label pinned to its edges.
+      Note that the view is added to the contentView, otherwise it wouldn’t work.
    
    3. This cell then overrides preferredLayoutAttributesFitting to update the
       cell’s vertical size according to layout you set in (1). Basically this:

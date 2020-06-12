@@ -15,8 +15,10 @@ import UIKit
  
    2. The view passed as generic should use Auto Layout.
       An example view could have, for instance, a label pinned to its edges.
-      Note that the view is added to the contentView, otherwise it wouldn’t work.
-   
+      Common mistakes that prevent self sizing:
+        - ✘ Pinning the elements to the root view instead the contentView.
+        - ✘ Adding a UIStackview to the contentView, then adding elements to the stack.
+
    3. This cell then overrides preferredLayoutAttributesFitting to update the
       cell’s vertical size according to layout you set in (1). Basically this:
       ```
@@ -42,7 +44,7 @@ import UIKit
    }
  ```
  */
-public class ViewCell<C: UIView & Configurable>: UICollectionViewCell, Configurable
+open class ViewCell<C: UIView & Configurable>: UICollectionViewCell, Configurable
 {
     private let cellView = C()
     
@@ -54,7 +56,7 @@ public class ViewCell<C: UIView & Configurable>: UICollectionViewCell, Configura
     }
     
     @available(*, unavailable)
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     

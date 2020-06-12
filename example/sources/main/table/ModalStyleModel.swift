@@ -1,3 +1,4 @@
+import Collection
 import UIKit
 
 struct ModalStyleModel: Model, Hashable

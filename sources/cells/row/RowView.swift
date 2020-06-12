@@ -1,6 +1,6 @@
 import UIKit
 
-public class RowView: UIView, Configurable
+open class RowView: UIView, Configurable
 {
     let label = UILabel().configure {
         $0.adjustsFontForContentSizeCategory = true
@@ -19,7 +19,7 @@ public class RowView: UIView, Configurable
     }
     
     @available(*, unavailable)
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("unavailable")
     }
     
@@ -37,7 +37,7 @@ public class RowView: UIView, Configurable
 
     // MARK: - Configurable
 
-    public func configure(_ model: Model)
+    open func configure(_ model: Model)
     {
         guard let rowModel = model as? RowModel else {
             log.error("Expected a RowModel, but got a \(model)")

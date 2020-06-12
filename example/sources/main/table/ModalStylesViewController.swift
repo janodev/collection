@@ -1,3 +1,4 @@
+import Collection
 import UIKit
 
 final class ModalStylesViewController: CollectionViewController

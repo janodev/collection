@@ -1,0 +1,70 @@
+name: example
+options:
+  bundleIdPrefix: es.com.jano.collection
+  usesTabs: false
+  indentWidth: 4
+  tabWidth: 4
+  createIntermediateGroups: true
+  deploymentTarget:
+    iOS: "13.2"
+
+settings:
+    CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED: YES
+    DEVELOPMENT_TEAM: PPSF6CNP8Q
+
+localPackages:
+  AutoLayout:
+    path: ../../autolayout
+  Log:
+    path: ../../log
+
+targets:
+
+  Collection:
+    dependencies:
+      - package: AutoLayout
+      - package: Log
+    platform: iOS
+    settings:
+      INFOPLIST_FILE: targets/collection/Info.plist
+    sources: ../sources
+    type: library.static
+
+  Example:
+    dependencies:
+      - package: AutoLayout
+      - package: Log
+      - target: Collection
+    platform: iOS
+    properties:
+      UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
+      UILaunchStoryboardName: LaunchScreen
+    settings:
+      INFOPLIST_FILE: targets/main/Info.plist
+      IPHONEOS_DEPLOYMENT_TARGET: 13.2
+      PRODUCT_BUNDLE_IDENTIFIER: "es.com.jano.example"
+      DEVELOPMENT_TEAM: PPSF6CNP8Q
+      CURRENT_PROJECT_VERSION: 1
+      MARKETING_VERSION: 1.0.0
+      PRODUCT_NAME: Example
+    scheme:
+      testTargets:
+        - ExampleTests
+    sources:
+      - sources/main
+      - targets/main/Info.plist
+    type: application
+
+  ExampleTests:
+    dependencies:
+      - target: Example
+    platform: iOS
+    settings:
+      DEVELOPMENT_TEAM: PPSF6CNP8Q
+      TEST_HOST: $(BUILT_PRODUCTS_DIR)/Example.app/Example
+      INFOPLIST_FILE: targets/tests/Info.plist
+      IPHONEOS_DEPLOYMENT_TARGET: 13.2
+      PRODUCT_BUNDLE_IDENTIFIER: "es.com.jano.example.tests"
+    sources:
+      - sources/tests
+    type: bundle.unit-test

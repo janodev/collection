@@ -1,3 +1,5 @@
+import Collection
+import Log
 import UIKit
 
 // Just an example, you can write your own cell from scratch as long as it conforms with `Configurable`.
@@ -8,7 +10,7 @@ final class ModalStyleView: RowView
 {
     override public func configure(_ model: Model) {
         guard let style = model as? ModalStyleModel else {
-            log.error("Expected a ModalStyle, but got a \(model)")
+//            log.error("Expected a ModalStyle, but got a \(model)")
             return
         }
         super.configure(RowModel(title: style.description))

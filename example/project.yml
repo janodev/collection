@@ -1,0 +1,70 @@
+name: example
+options:
+  bundleIdPrefix: dev.jano.collection
+  createIntermediateGroups: true
+  deploymentTarget:
+    iOS: "14.5"
+  indentWidth: 4
+  tabWidth: 4
+  usesTabs: false
+
+settings:
+    CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED: YES
+    DEVELOPMENT_TEAM: PPSF6CNP8Q
+
+packages:
+
+  AutoLayoutDynamic:
+    url: git@github.com:janodev/autolayout.git
+    from: 1.0.0
+
+  CollectionDynamic:
+    path: ..
+    
+  LogDynamic:
+    url: git@github.com:janodev/log.git
+    from: 1.0.0
+
+targets:
+
+  Example:
+    dependencies:
+      - package: AutoLayoutDynamic
+        embed: true
+      - package: LogDynamic
+        embed: true
+      - package: CollectionDynamic
+        embed: true
+    platform: iOS
+    properties:
+      UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
+      UILaunchStoryboardName: LaunchScreen
+    settings:
+      INFOPLIST_FILE: targets/main/Info.plist
+      IPHONEOS_DEPLOYMENT_TARGET: 14.5
+      PRODUCT_BUNDLE_IDENTIFIER: "dev.jano.example"
+      DEVELOPMENT_TEAM: PPSF6CNP8Q
+      CURRENT_PROJECT_VERSION: 1
+      MARKETING_VERSION: 1.0.0
+      PRODUCT_NAME: Example
+    scheme:
+      testTargets:
+        - ExampleTests
+    sources:
+      - sources/main
+      - targets/main/Info.plist
+    type: application
+
+  ExampleTests:
+    dependencies:
+      - target: Example
+    platform: iOS
+    settings:
+      DEVELOPMENT_TEAM: PPSF6CNP8Q
+      TEST_HOST: $(BUILT_PRODUCTS_DIR)/Example.app/Example
+      INFOPLIST_FILE: targets/tests/Info.plist
+      IPHONEOS_DEPLOYMENT_TARGET: 14.5
+      PRODUCT_BUNDLE_IDENTIFIER: "dev.jano.example.tests"
+    sources:
+      - sources/tests
+    type: bundle.unit-test

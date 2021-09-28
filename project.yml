@@ -1,0 +1,40 @@
+name: collection
+
+options:
+  bundleIdPrefix: dev.jano.collection
+  usesTabs: false
+  indentWidth: 4
+  tabWidth: 4
+  createIntermediateGroups: true
+  deploymentTarget:
+    iOS: "14.5"
+
+settings:
+  CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED: YES
+
+packages:
+
+  AutoLayoutDynamic:
+    url: git@github.com:janodev/autolayout.git
+    from: 1.0.0
+    
+  LogDynamic:
+    url: git@github.com:janodev/log.git
+    from: 1.0.0
+
+targets:
+
+ Collection:
+   dependencies:
+     - package: LogDynamic
+     - package: AutoLayoutDynamic
+   platform: iOS
+   settings:
+     CURRENT_PROJECT_VERSION: 1
+     INFOPLIST_FILE: targets/main/Info.plist
+     IPHONEOS_DEPLOYMENT_TARGET: 14.5
+     PRODUCT_BUNDLE_IDENTIFIER: dev.jano.collection
+     PRODUCT_NAME: Collection
+   sources: 
+      - sources/main
+   type: framework
